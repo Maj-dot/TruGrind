@@ -4,8 +4,8 @@
   }
   
   .dashboard-hero {
-    background-color: #303030;
-    color: white;
+    background-color: #000000;
+    color: rgb(152, 242, 17);
     padding: 50px;
     margin-bottom: 30px;
   }

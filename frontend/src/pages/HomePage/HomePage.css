@@ -4,14 +4,14 @@
   }
   
   .hero {
-    background-color: #030303;
-    color: white;
+    background-color: #000000;
+    color: rgb(152, 242, 17);
     padding: 50px;
     margin-bottom: 30px;
   }
   
   .cta-button {
-    background-color: #22ff5d;
+    background-color: #0afe0e;
     color: white;
     padding: 10px 20px;
     border: none;

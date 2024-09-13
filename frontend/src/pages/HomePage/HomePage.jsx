@@ -41,7 +41,7 @@ export default function HomePage() {
 
       <footer className="footer">
         <p>
-          Already hane an account? <a href="/login">Log In</a>
+          Already have an account? <a href="/login">Log In</a>
         </p>
       </footer>
     </div>
