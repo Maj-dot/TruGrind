@@ -18,6 +18,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    exercises: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Exercise',
+    }],
+    workoutPlans: [{
+      type: Schema.Types.ObjectId,
+      ref: 'WorkoutPlan',
+    }],
   },
   {
     timestamps: true,
