@@ -6,7 +6,7 @@ import Navbar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import DashboardPage from '../DashboardPage/DashboardPage';
 import PostListPage from '../PostListPage/PostListPage';
-import NewPostPage from '../NewPostPage/NewPostPage';
+import NewExercisePage from '../NewExercisePage/NewExercisePage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LoginPage from '../LogInPage/LogInPage';
 
@@ -22,7 +22,7 @@ function App() {
             <>
               <Route path="/" element={<DashboardPage />} />
               <Route path="/posts" element={<PostListPage />} />
-              <Route path="/posts/new" element={<NewPostPage />} />
+              <Route path="/posts/new" element={<NewExercisePage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           ) : (
