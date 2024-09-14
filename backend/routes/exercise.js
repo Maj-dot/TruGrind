@@ -2,5 +2,7 @@ const express = require('express');
 const router = express.Router();
 const exerciseCtrl = require('../controllers/exercise');
 
-// Create exercise
-router.post('/', exerciseCtrl.createExercise);
+// POST /api/exercise
+router.post('/', exerciseCtrl.create);
+
+module.exports = router; 

@@ -2,6 +2,8 @@ const path = require('path'); // Built into Node
 const express = require('express');
 const logger = require('morgan');
 const app = express();
+const exercise = require('./routes/exercise');
+//const workoutPlan = require('./routes/workoutPlan');
 
 // Process the secrets/config vars in .env
 require('dotenv').config();
@@ -28,6 +30,8 @@ app.use(require('./middleware/checkToken'));
 // API Routes
 app.use('/api/auth', require('./routes/auth'));
 const ensureLoggedIn = require('./middleware/ensureLoggedIn');
+app.use('/api/exercises', ensureLoggedIn, exercise);
+//app.use('/api/workoutPlans', workoutPlan);
 // Remember to use ensureLoggedIn middleware when mounting
 // routes and/or within the route modules to protect routes
 // that require a logged in user either
