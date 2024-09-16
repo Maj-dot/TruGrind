@@ -8,6 +8,7 @@ module.exports = {
   index,
   show,
   update,
+  deleteExercise
 };
 
 // Create exercise
@@ -60,7 +61,7 @@ async function update(req, res) {
       }
       const exercise = await Exercise.findById(exerciseId);
       if (!exercise) {
-          return res.status(404).json({ err: "Whoops, exercise not found!." });
+          return res.status(404).json({ err: "Whoops, exercise not found!" });
       }
       if (!exercise.user.equals(userId)) {
           return res.status(403).json({ err: "You don't have permission to update this exercise." });
@@ -73,5 +74,28 @@ async function update(req, res) {
       res.status(200).json(updatedExercise);
   } catch (err) {
       res.status(500).json({ error: "Oops, something went wrong!" });
+  }
+}
+
+// Delete exercise
+
+async function deleteExercise(req, res) {
+  try {
+    const { exerciseId } = req.params;
+    const userId = req.user._id;
+    if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
+      return res.status(400).json({ err: "Invalid exercise ID format."});
+    }
+    const exercise = await Exercise.findById(exerciseId);
+    if (!exercise) {
+      return res.status(404).json({err: "Whoops, exercise not found!"});
+    }
+    if (!exercise.user.equals(userId)) {
+      return res.status(403).json({ err: "You don't have permission to delete this!"});
+    }
+    await Exercise.findByIdAndDelete(exerciseId);
+  res.status(200).json({ message: "Exercise deleted successfully!"});
+  } catch (err) {
+    res.status(500).json({ err: "Oops, something went wrong!" });
   }
 }

@@ -16,6 +16,9 @@ router.get('/:exerciseId', exerciseCtrl.show);
 // PUT /api/:exerciseId
 router.put('/:exerciseId', exerciseCtrl.update);
 
+// DELETE /api/:exerciseID
+router.delete('/:exerciseId', exerciseCtrl.deleteExercise);
+
 
 
 module.exports = router; 
