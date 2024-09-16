@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// Submit Button Not Working
+
 const ExerciseForm = (props) => {
   const [formData, setFormData] = useState({
     exercise_id: "",
@@ -16,8 +18,10 @@ const ExerciseForm = (props) => {
   };
 
   const handleSubmit = (evt) => {
-    evt.prventDefault();
+    evt.preventDefault();
+    console.log('Form submitted!')
     props.handleCreate(formData);
+    console.log('handleCreate called with:', formData);
   };
 
   return (
@@ -101,8 +105,9 @@ const ExerciseForm = (props) => {
           value={formData.date}
           onChange={handleChange}
         />
+        <button type="submit">Let's Grind!</button>
       </form>
-      <button type="submit">Let's Grind!</button>
+      
     </main>
   );
 };

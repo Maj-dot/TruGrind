@@ -1,17 +1,37 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { getUser } from '../../services/authService';
 import '../App/App.css';
 import Navbar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import DashboardPage from '../DashboardPage/DashboardPage';
-import PostListPage from '../PostListPage/PostListPage';
+import ExerciseListPage from '../ExerciseListPage/ExerciseListPage';
 import NewExercisePage from '../NewExercisePage/NewExercisePage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LoginPage from '../LogInPage/LogInPage';
+import ExerciseForm from '../../components/ExerciseForm/ExerciseForm';
+import exercisesService from '../../services/exercisesService';
 
 function App() {
   const [user, setUser] = useState(getUser());
+  const [exercises, setExercises] = useState([]);
+  const navigate = useNavigate();
+
+  const handleCreate = async (exerciseForm) => {
+    const newExercise = await exercisesService.create(exerciseForm);
+    setExercises([newExercise, ...exercises]);
+    navigate('/exercises');
+  };
+
+  useEffect(() => {
+    const fetchAllExercises = async () => {
+      const exerciseData = await exercisesService.index();
+      setExercises(exerciseData);
+    };
+    fetchAllExercises();
+  }, []);
 
   return (
     <main id="react-app">
@@ -21,8 +41,8 @@ function App() {
           {user ? (           
             <>
               <Route path="/" element={<DashboardPage />} />
-              <Route path="/exercises" element={<PostListPage />} />
-              <Route path="/exercises/new" element={<NewExercisePage />} />
+              <Route path="/exercises" element={<ExerciseListPage />} />
+              <Route path="/exercises/new" element={<NewExercisePage handleCreate={handleCreate} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           ) : (
