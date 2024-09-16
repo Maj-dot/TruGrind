@@ -21,8 +21,8 @@ function App() {
           {user ? (           
             <>
               <Route path="/" element={<DashboardPage />} />
-              <Route path="/posts" element={<PostListPage />} />
-              <Route path="/posts/new" element={<NewExercisePage />} />
+              <Route path="/exercises" element={<PostListPage />} />
+              <Route path="/exercises/new" element={<NewExercisePage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           ) : (

@@ -27,8 +27,8 @@ const ExerciseForm = (props) => {
         <input
           required
           type="text"
-          name="exercise"
-          id="title-input"
+          name="exercise_id"
+          id="exercise_id-input"
           value={formData.exercise_id}
           onChange={handleChange}
         />
@@ -71,7 +71,7 @@ const ExerciseForm = (props) => {
         </select>
         <label htmlFor="weight-input">Weight</label>
         <input
-          type="number"
+          type="text"
           name="weight"
           id="weight-input"
           value={formData.weight}
@@ -93,7 +93,7 @@ const ExerciseForm = (props) => {
           value={formData.sets}
           onChange={handleChange}
         />
-        <label htmlFor="date">Date</label>
+        <label htmlFor="date-input">Date</label>
         <input
           type="date"
           name="date"
