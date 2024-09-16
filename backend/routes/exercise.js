@@ -4,10 +4,15 @@ const exerciseCtrl = require('../controllers/exercise');
 
 // All paths start with '/api/exercise'
 
-// POST /api/exercise
+// POST /api/exercises
 router.post('/', exerciseCtrl.create);
 
-// GET /api/exercise
+// GET /api/exercises
 router.get('/', exerciseCtrl.index);
+
+// GET /api/exercises/:exerciseId
+router.get('/:exerciseId', exerciseCtrl.show);
+
+
 
 module.exports = router; 

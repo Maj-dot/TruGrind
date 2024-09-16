@@ -3,6 +3,7 @@ const Exercise = require("../models/exercise");
 module.exports = {
   create,
   index,
+  show, 
 };
 
 // Create exercise
@@ -29,5 +30,15 @@ async function index(req, res) {
         res.status(200).json(exercises);    
     } catch (err) {
         res.status(400).json(err);
+    }
+}
+
+// Show exercise
+async function show(req, res) {
+    try {
+        const exercise = await Exercise.findById(req.params.exerciseId).populate(["user"]);
+        res.status(200).json(exercise);
+    } catch (err) {
+        res.status(500).json({error: "Oops, try again!"})
     }
 }
