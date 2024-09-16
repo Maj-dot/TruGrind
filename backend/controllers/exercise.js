@@ -72,7 +72,6 @@ async function update(req, res) {
       );
       res.status(200).json(updatedExercise);
   } catch (err) {
-      console.error(err);
       res.status(500).json({ error: "Oops, something went wrong!" });
   }
 }
