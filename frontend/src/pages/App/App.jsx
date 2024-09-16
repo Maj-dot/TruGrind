@@ -28,6 +28,7 @@ function App() {
   useEffect(() => {
     const fetchAllExercises = async () => {
       const exerciseData = await exercisesService.index();
+      console.log('Fetched exercises:', exerciseData);
       setExercises(exerciseData);
     };
     fetchAllExercises();
@@ -41,7 +42,7 @@ function App() {
           {user ? (           
             <>
               <Route path="/" element={<DashboardPage />} />
-              <Route path="/exercises" element={<ExerciseListPage />} />
+              <Route path="/exercises" element={<ExerciseListPage exercises={exercises} />} />
               <Route path="/exercises/new" element={<NewExercisePage handleCreate={handleCreate} />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
