@@ -20,21 +20,20 @@ const exerciseSchema = new Schema({
         ],
     },
     duration: {
-        type: Number, 
+        type: String, 
         required: true,
     },
     weight: {
-        type: Number,
+        type: String,
     },
     reps: {
-        type: Number,
+        type: String,
     },
     sets: {
-        type: Number,
+        type: String,
     },
     date: {
         type: Date,
-        required: true,
         default: Date.now,
     },
     user: {
