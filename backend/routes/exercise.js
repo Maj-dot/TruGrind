@@ -13,6 +13,9 @@ router.get('/', exerciseCtrl.index);
 // GET /api/exercises/:exerciseId
 router.get('/:exerciseId', exerciseCtrl.show);
 
+// PUT /api/:exerciseId
+router.put('/:exerciseId', exerciseCtrl.update);
+
 
 
 module.exports = router; 
