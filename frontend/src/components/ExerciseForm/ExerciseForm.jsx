@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './ExerciseFormPage.css';
 
 // Submit Button Not Working
 
@@ -26,7 +27,8 @@ const ExerciseForm = (props) => {
 
   return (
     <main>
-      <form onSubmit={handleSubmit}>
+      <div className="exercise-form-container">
+      <form className="exercise-form" onSubmit={handleSubmit}>
         <label htmlFor="exercise_id-input">Exercise</label>
         <input
           required
@@ -107,7 +109,7 @@ const ExerciseForm = (props) => {
         />
         <button type="submit">Let's Grind!</button>
       </form>
-      
+      </div>
     </main>
   );
 };

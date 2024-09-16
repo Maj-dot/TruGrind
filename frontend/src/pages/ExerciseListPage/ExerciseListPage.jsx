@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
+import './ExerciseListPage.css';
 
 export default function ExerciseListPage(props) {
   console.log('ExerciseListPage props.exercises:', props.exercises);
 
   return (
     <main>
+        <div className="exercise-card">
         {props.exercises && props.exercises.length > 0 ? (
             props.exercises.map((exercise) => (
                 <Link key={exercise._id} to={`/exercises/${exercise._id}`}>
@@ -20,6 +22,7 @@ export default function ExerciseListPage(props) {
         ) : (
             <p>If You Want To Stay True To The Grind Add A Exercise!</p>
         )}
+        </div>
     </main>
 );
 }

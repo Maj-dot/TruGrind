@@ -11,7 +11,6 @@ import ExerciseListPage from '../ExerciseListPage/ExerciseListPage';
 import NewExercisePage from '../NewExercisePage/NewExercisePage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LoginPage from '../LogInPage/LogInPage';
-import ExerciseForm from '../../components/ExerciseForm/ExerciseForm';
 import exercisesService from '../../services/exercisesService';
 
 function App() {

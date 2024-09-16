@@ -1,10 +1,23 @@
 .NavBar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 2vmin;
+  padding: 1rem 2rem;
+  background-color: #1DB954; /* Spotify green */
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.NavBar span {
-  color: rgb(108, 9, 87);
+.NavBar a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background 0.3s;
+}
+
+.NavBar a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
 }
