@@ -5,6 +5,7 @@ const exercisesService = {
   create,
   index,
   show,
+  update
 };
 
 export function index() {

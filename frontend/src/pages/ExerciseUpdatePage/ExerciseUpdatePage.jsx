@@ -17,7 +17,7 @@ export default function ExerciseUpdatePage() {
   useEffect(() => {
     async function fetchExercise() {
       try {
-        const fetchedExercise = await exercisesService.show(exercise_id);
+        const fetchedExercise = await exercisesService.index();
         setExercise(fetchedExercise);
       } catch (err) {
         console.error("Error fetching exercise:", err);
@@ -28,12 +28,15 @@ export default function ExerciseUpdatePage() {
 
   async function handleUpdate(e) {
     e.preventDefault();
+    console.log("Exercise ID:", exercise_id);
+    console.log("Exercise Data:", exercise);
     try {
       await exercisesService.update(exercise_id, exercise);
       navigate(`/exercises/${exercise_id}`);
     } catch (err) {
       console.error("Error updating exercise:", err);
-    }
+    } 
+    navigate("/exercises");
   }
 
   function handleChange(evt) {
@@ -45,6 +48,15 @@ export default function ExerciseUpdatePage() {
     <main>
       <div className="exercise-form-container">
         <form className="exercise-form" onSubmit={handleUpdate}>
+        <label htmlFor="exercise_id-input">Exercise</label>
+          <input
+            required
+            type="text"
+            name="exercise_id"
+            id="exercise_id-input"
+            value={exercise.exercise_id}
+            onChange={handleChange}
+          />
           <label htmlFor="type-input">Type</label>
           <select
             required
@@ -114,6 +126,7 @@ export default function ExerciseUpdatePage() {
             value={exercise.date}
             onChange={handleChange}
           />
+         
           <button type="submit">Update The Grind!</button>
         </form>
       </div>

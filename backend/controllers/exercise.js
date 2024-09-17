@@ -28,10 +28,9 @@ async function create(req, res) {
 // Index exercises
 async function index(req, res) {
   try {
-    const exercises = await Exercise.find({})
-      .populate("user")
-      .sort({ createdAt: "desc" });
-    console.log(exercises);
+    const userId = req.user._id; 
+    const exercises = await Exercise.find({ user: userId }) 
+      .sort({ createdAt: 'desc' });
     res.status(200).json(exercises);
   } catch (err) {
     res.status(400).json(err);
@@ -42,7 +41,8 @@ async function index(req, res) {
 async function show(req, res) {
   try {
     console.log('Exercise ID:', req.params.exerciseId);
-    const exercise = await Exercise.findById(req.params.exerciseId).populate()
+    const exercise = await Exercise.findOne({ _id: req.params.exerciseId, user: req.user._id });
+    if (!exercise) return res.status(404).json({ error: "Exercise not found or not authorized" });
     res.status(200).json(exercise);
   } catch (err) {
     res.status(500).json({ error: "Oops, try again!" });
@@ -50,34 +50,28 @@ async function show(req, res) {
 }
 
 // Update exercise
-
 async function update(req, res) {
   try {
-      const { exerciseId } = req.params;
-      const userId = req.user._id;
-      if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
-          return res.status(400).json({ err: "Invalid exercise ID format." });
-      }
-      const exercise = await Exercise.findById(exerciseId);
-      if (!exercise) {
-          return res.status(404).json({ err: "Whoops, exercise not found!" });
-      }
-      if (!exercise.user.equals(userId)) {
-          return res.status(403).json({ err: "You don't have permission to update this exercise." });
-      }
-      const updatedExercise = await Exercise.findByIdAndUpdate(
-          exerciseId,
-          req.body,
-          { new: true, runValidators: true }
-      );
-      res.status(200).json(updatedExercise);
+    const exerciseId = req.params.exerciseId;
+    const userId = req.user._id;    
+    if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
+      return res.status(400).json({ err: "Invalid exercise ID format." });
+    }
+    const updatedExercise = await Exercise.findOneAndUpdate(
+      { _id: exerciseId, user: userId },  
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedExercise) {
+      return res.status(404).json({ err: "Exercise not found or not authorized." });
+    }
+    res.status(200).json(updatedExercise);
   } catch (err) {
-      res.status(500).json({ error: "Oops, something went wrong!" });
+    res.status(500).json({ error: "Oops, something went wrong!" });
   }
 }
 
 // Delete exercise
-
 async function deleteExercise(req, res) {
   try {
     const { exerciseId } = req.params;
