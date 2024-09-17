@@ -1,13 +1,13 @@
 .exercise-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
-    margin: 1rem;
-    max-width: 300px;
-    transition: transform 0.3s;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 300px;
+  transition: transform 0.3s;
 }
 
 .exercise-card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }

@@ -41,9 +41,8 @@ async function index(req, res) {
 // Show exercise
 async function show(req, res) {
   try {
-    const exercise = await Exercise.findById(req.params.exerciseId).populate([
-      "user",
-    ]);
+    console.log('Exercise ID:', req.params.exerciseId);
+    const exercise = await Exercise.findById(req.params.exerciseId).populate()
     res.status(200).json(exercise);
   } catch (err) {
     res.status(500).json({ error: "Oops, try again!" });
