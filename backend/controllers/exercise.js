@@ -27,14 +27,10 @@ async function create(req, res) {
 
 // Index exercises
 async function index(req, res) {
-  try {
     const userId = req.user._id; 
     const exercises = await Exercise.find({ user: userId }) 
       .sort({ createdAt: 'desc' });
     res.status(200).json(exercises);
-  } catch (err) {
-    res.status(400).json(err);
-  }
 }
 
 // Show exercise

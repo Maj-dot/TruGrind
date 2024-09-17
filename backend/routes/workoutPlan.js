@@ -7,4 +7,11 @@ const workoutPlanCtrl = require('../controllers/workoutPlan');
 // POST '/api/workoutPlans'
 router.post('/', workoutPlanCtrl.createWorkoutPlan);
 
+// GET '/api/workoutPlans'
+router.get('/', workoutPlanCtrl.indexWorkoutPlan);
+
+// GET '/api/workoutPlans/:workoutPlanId'
+router.get('/:workoutPlanId')
+
+
 module.exports = router;

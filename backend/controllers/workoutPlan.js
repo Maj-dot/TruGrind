@@ -2,6 +2,7 @@ const WorkoutPlan = require('../models/workoutPlan');
 
 module.exports = {
     createWorkoutPlan,
+    indexWorkoutPlan,
 };
 
 // Create workout
@@ -20,3 +21,13 @@ async function createWorkoutPlan(req,res) {
         res.status(400).json({ error: 'Error creating workout plan.'});
     }
 }
+
+// Index workout
+async function indexWorkoutPlan(req,res) {
+        const userId = req.user._id; 
+        const workoutPlans = await WorkoutPlan.find({ user: userId }) 
+          .sort({ createdAt: 'desc' });
+        res.status(200).json(workoutPlans);
+}
+
+// Show workout
