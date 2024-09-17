@@ -19,4 +19,8 @@ export function show(exerciseId) {
   return sendRequest(`${BASE_URL}/${exerciseId}`);
 }
 
+export function update(exerciseId, exerciseData) {
+  return sendRequest(`${BASE_URL}/${exerciseId}`, 'PUT', exerciseData);
+}
+
 export default exercisesService;

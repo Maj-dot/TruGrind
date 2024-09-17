@@ -35,7 +35,10 @@ export default function ExerciseShowPage() {
                     <p>{exercise.sets} Sets</p>   
                     <p>{exercise.date}</p>                
                 </article>
-                <Link to="/exercises">Back to Exercises</Link>
+                <Link to="/exercises/">Back to Exercises</Link>
+                <Link to={`/exercises/${exercise_id}/edit`}>
+                <button>Edit</button>
+                </Link>
             </div>
         </main>
     );

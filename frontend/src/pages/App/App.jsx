@@ -7,12 +7,13 @@ import { getUser } from "../../services/authService";
 import SignUpPage from "../SignUpPage/SignUpPage";
 import LoginPage from "../LogInPage/LogInPage";
 import Navbar from "../../components/NavBar/NavBar";
+import exercisesService from "../../services/exercisesService";
 import HomePage from "../HomePage/HomePage";
 import DashboardPage from "../DashboardPage/DashboardPage";
 import NewExercisePage from "../NewExercisePage/NewExercisePage";
 import ExerciseListPage from "../ExerciseListPage/ExerciseListPage";
 import ExerciseShowPage from "../ExerciseShowPage/ExerciseShowPage";
-import exercisesService from "../../services/exercisesService";
+import ExerciseUpdatePage from "../ExerciseUpdatePage/ExerciseUpdatePage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -54,6 +55,7 @@ function App() {
                 path="/exercises/:exercise_id"
                 element={<ExerciseShowPage />}
               />
+              <Route path="/exercises/:exercise_id/edit" element={<ExerciseUpdatePage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           ) : (
