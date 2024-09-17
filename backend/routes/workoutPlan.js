@@ -16,7 +16,8 @@ router.get('/:workoutPlanId', workoutPlanCtrl.showWorkoutPlan);
 // PUT '/api/workoutPlans/:workoutPlanId'
 router.put('/:workoutPlanId', workoutPlanCtrl.updateWorkoutPlan);
 
-
+// DELETE '/api/workoutPlans/:workoutPlanId'
+router.delete('/:workoutPlanId', workoutPlanCtrl.deleteWorkoutPlan);
 
 
 module.exports = router;

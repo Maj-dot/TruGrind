@@ -7,6 +7,7 @@ module.exports = {
   indexWorkoutPlan,
   showWorkoutPlan,
   updateWorkoutPlan,
+  deleteWorkoutPlan
 };
 
 // Create workout
@@ -70,5 +71,27 @@ async function updateWorkoutPlan(req, res) {
     } catch (err) {
       console.log(err)  
       res.status(500).json({ error: "Oops, something went wrong!", err });
+    }
+  }
+
+  // Delete workout
+  async function deleteWorkoutPlan(req, res) {
+    try {
+      const workoutPlanId  = req.params.workoutPlanId;
+      const userId = req.user._id;
+      if (!mongoose.Types.ObjectId.isValid(workoutPlanId)) {
+        return res.status(400).json({ err: "Invalid workout plan ID format."});
+      }
+      const workoutPlan = await WorkoutPlan.findById(workoutPlanId);
+      if (!workoutPlan) {
+        return res.status(404).json({err: "Whoops, workout plan not found!"});
+      }
+      if (!workoutPlan.user.equals(userId)) {
+        return res.status(403).json({ err: "You don't have permission to delete this!"});
+      }
+      await WorkoutPlan.findByIdAndDelete(workoutPlanId);
+    res.status(200).json({ message: "Workout plan deleted successfully!"});
+    } catch (err) {
+      res.status(500).json({ err: "Oops, something went wrong!" });
     }
   }
