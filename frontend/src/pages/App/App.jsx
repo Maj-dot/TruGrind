@@ -14,6 +14,7 @@ import NewExercisePage from "../NewExercisePage/NewExercisePage";
 import ExerciseListPage from "../ExerciseListPage/ExerciseListPage";
 import ExerciseShowPage from "../ExerciseShowPage/ExerciseShowPage";
 import ExerciseUpdatePage from "../ExerciseUpdatePage/ExerciseUpdatePage";
+import WorkoutPlanListPage from "../WorkoutPlanListPage/WorkoutPlanListPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -56,6 +57,7 @@ function App() {
                 element={<ExerciseShowPage />}
               />
               <Route path="/exercises/:exercise_id/edit" element={<ExerciseUpdatePage />} />
+              <Route path="/workoutPlans" element={<WorkoutPlanListPage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           ) : (
