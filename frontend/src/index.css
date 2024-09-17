@@ -2,8 +2,8 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #d1d1d1; /* Light gray text */
-  background-color: #121212; /* Dark background */
+  color: #d1d1d1; 
+  background-color: #121212; 
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,14 +27,14 @@ h2 {
 }
 
 button {
-  border: 1px solid #1db954; /* Spotify green border */
+  border: 1px solid #1db954; 
   border-radius: 5px;
   padding: 0.8rem;
   font-size: 1.2rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1db954; /* Spotify green */
-  color: #ffffff; /* White text */
+  background-color: #1db954; 
+  color: #ffffff; 
   cursor: pointer;
 }
 button:hover {
@@ -55,8 +55,8 @@ a {
 }
 
 a:hover {
-  background-color: #333; /* Dark hover effect */
-  color: #1db954; /* Spotify green */
+  background-color: #333; 
+  color: #1db954; 
 }
 
 form {
