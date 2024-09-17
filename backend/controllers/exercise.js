@@ -74,7 +74,7 @@ async function update(req, res) {
 // Delete exercise
 async function deleteExercise(req, res) {
   try {
-    const { exerciseId } = req.params;
+    const exerciseId  = req.params.exerciseId;
     const userId = req.user._id;
     if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
       return res.status(400).json({ err: "Invalid exercise ID format."});
