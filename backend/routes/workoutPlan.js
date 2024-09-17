@@ -11,7 +11,7 @@ router.post('/', workoutPlanCtrl.createWorkoutPlan);
 router.get('/', workoutPlanCtrl.indexWorkoutPlan);
 
 // GET '/api/workoutPlans/:workoutPlanId'
-router.get('/:workoutPlanId')
+router.get('/:workoutPlanId', workoutPlanCtrl.showWorkoutPlan);
 
 
 module.exports = router;
