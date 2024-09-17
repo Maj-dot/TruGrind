@@ -54,7 +54,12 @@ export default function ExerciseListPage() {
                   >
                     View Exercise
                   </Link>
-                  <button className="delete-button">Delete</button>
+                  <button
+                    className="delete-button"
+                    onClick={() => handleDelete(exercise._id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               </article>
             </div>
