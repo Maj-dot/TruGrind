@@ -1,9 +1,12 @@
+const mongoose = require('mongoose');
+const workoutPlan = require("../models/workoutPlan");
 const WorkoutPlan = require("../models/workoutPlan");
 
 module.exports = {
   createWorkoutPlan,
   indexWorkoutPlan,
   showWorkoutPlan,
+  updateWorkoutPlan,
 };
 
 // Create workout
@@ -49,7 +52,8 @@ async function showWorkoutPlan(req, res) {
 // Update workout
 async function updateWorkoutPlan(req, res) {
     try {
-      const exerciseId = req.params.workoutPlanId;
+        
+      const workoutPlanId = req.params.workoutPlanId;
       const userId = req.user._id;    
       if (!mongoose.Types.ObjectId.isValid(workoutPlanId)) {
         return res.status(400).json({ err: "Invalid workout plan ID format." });
@@ -64,6 +68,7 @@ async function updateWorkoutPlan(req, res) {
       }
       res.status(200).json(updatedWorkoutPlan);
     } catch (err) {
-      res.status(500).json({ error: "Oops, something went wrong!" });
+      console.log(err)  
+      res.status(500).json({ error: "Oops, something went wrong!", err });
     }
   }

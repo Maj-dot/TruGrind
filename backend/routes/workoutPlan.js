@@ -13,5 +13,10 @@ router.get('/', workoutPlanCtrl.indexWorkoutPlan);
 // GET '/api/workoutPlans/:workoutPlanId'
 router.get('/:workoutPlanId', workoutPlanCtrl.showWorkoutPlan);
 
+// PUT '/api/workoutPlans/:workoutPlanId'
+router.put('/:workoutPlanId', workoutPlanCtrl.updateWorkoutPlan);
+
+
+
 
 module.exports = router;
