@@ -28,11 +28,11 @@ export default function ExerciseShowPage() {
                     <header>
                         <h2>{exercise.exercise_id}</h2>
                     </header>
-                    <p>{exercise.type}</p>
+                    <p>Type: {exercise.type}</p>
                     <p>{exercise.duration} Mins</p>
-                    <p>{exercise.weight}</p>
-                    <p>{exercise.reps}</p>
-                    <p>{exercise.sets}</p>                   
+                    <p>{exercise.weight} lbs</p> 
+                    <p>{exercise.reps} Reps</p>
+                    <p>{exercise.sets} Sets</p>                   
                 </article>
                 <Link to="/exercises">Back to Exercises</Link>
             </div>

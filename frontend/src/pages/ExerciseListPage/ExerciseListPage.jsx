@@ -8,6 +8,7 @@ export default function ExerciseListPage(props) {
         {props.exercises && props.exercises.length > 0 ? (
           props.exercises.map((exercise) => (
             <Link key={exercise._id} to={`/exercises/${exercise._id}`}>
+              
               <article>
                 <header>
                   <h2>{exercise.exercise_id}</h2>
@@ -18,6 +19,7 @@ export default function ExerciseListPage(props) {
                 </header>
                 <p>{exercise.text}</p>
               </article>
+              <button>View Exercise</button>
             </Link>
           ))
         ) : (
