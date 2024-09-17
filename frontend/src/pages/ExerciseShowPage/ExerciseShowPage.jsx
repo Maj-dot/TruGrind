@@ -32,7 +32,8 @@ export default function ExerciseShowPage() {
                     <p>{exercise.duration} Mins</p>
                     <p>{exercise.weight} lbs</p> 
                     <p>{exercise.reps} Reps</p>
-                    <p>{exercise.sets} Sets</p>                   
+                    <p>{exercise.sets} Sets</p>   
+                    <p>{exercise.date}</p>                
                 </article>
                 <Link to="/exercises">Back to Exercises</Link>
             </div>
