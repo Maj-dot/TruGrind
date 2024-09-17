@@ -1,5 +1,5 @@
 .exercise-card {
-  background: white;
+  background: #1e1e1e;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -10,4 +10,27 @@
 
 .exercise-card:hover {
   transform: translateY(-5px);
+}
+
+.button-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-exercise-link, .delete-button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.view-exercise-link {
+  background-color: #1db954; 
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.delete-button {
+  background-color: #ff4d4f; 
+  color: #ffffff;
 }

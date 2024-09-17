@@ -3,21 +3,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #1DB954; /* Spotify green */
-  color: white;
+  background-color: #000000; /* Black background */
+  color: #1db954; /* Spotify green */
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .NavBar a {
-  color: white;
+  color: #ffffff; /* White text */
   text-decoration: none;
   padding: 0.5rem 1rem;
   transition: background 0.3s;
 }
 
 .NavBar a:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: #1db954; /* Spotify green hover */
   border-radius: 5px;
 }

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import exercisesService from '../../services/exercisesService'; 
-import './ExerciseListPage.css';
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import exercisesService from "../../services/exercisesService";
+import "./ExerciseListPage.css";
 
 export default function ExerciseListPage() {
   const [exercises, setExercises] = useState([]);
@@ -13,20 +13,22 @@ export default function ExerciseListPage() {
         const fetchedExercises = await exercisesService.index();
         setExercises(fetchedExercises);
       } catch (err) {
-        console.error('Error fetching exercises:', err);
+        console.error("Error fetching exercises:", err);
       }
     }
     fetchExercises();
-  }, []); 
+  }, []);
 
   async function handleDelete(exerciseId) {
     try {
       console.log(exerciseId);
       await exercisesService.deleteExercise(exerciseId);
-      setExercises(prevExercises => prevExercises.filter(e => e._id !== exerciseId));
-      navigate('/exercises');
+      setExercises((prevExercises) =>
+        prevExercises.filter((e) => e._id !== exerciseId)
+      );
+      navigate("/exercises");
     } catch (err) {
-      console.error('Error deleting exercise:', err);
+      console.error("Error deleting exercise:", err);
     }
   }
 
@@ -39,11 +41,21 @@ export default function ExerciseListPage() {
               <article>
                 <header>
                   <h2>{exercise.exercise_id}</h2>
-                  <p>{exercise.user.username} posted on {new Date(exercise.createdAt).toLocaleDateString()}</p>
+                  <p>
+                    {exercise.user.username} posted on{" "}
+                    {new Date(exercise.createdAt).toLocaleDateString()}
+                  </p>
                 </header>
                 <p>{exercise.text}</p>
-                <Link to={`/exercises/${exercise._id}`}>View Exercise</Link>
-                <button onClick={() => handleDelete(exercise._id)}>Delete</button> 
+                <div className="button-container">
+                  <Link
+                    to={`/exercises/${exercise._id}`}
+                    className="view-exercise-link"
+                  >
+                    View Exercise
+                  </Link>
+                  <button className="delete-button">Delete</button>
+                </div>
               </article>
             </div>
           ))
@@ -54,4 +66,3 @@ export default function ExerciseListPage() {
     </main>
   );
 }
-
