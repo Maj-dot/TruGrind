@@ -26,8 +26,8 @@ function App() {
   const [workoutPlans, setWorkoutPlans] = useState([]);
   const navigate = useNavigate();
 
-  const handleCreate = async (exerciseForm) => {
-    const newExercise = await exercisesService.create(exerciseForm);
+  const handleCreate = async (formData) => {
+    const newExercise = await exercisesService.create(formData);
     setExercises([newExercise, ...exercises]);
     navigate("/exercises");
   };
