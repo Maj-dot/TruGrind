@@ -18,6 +18,7 @@ import WorkoutPlanListPage from "../WorkoutPlanListPage/WorkoutPlanListPage";
 import ExerciseShowPage from "../ExerciseShowPage/ExerciseShowPage";
 import WorkoutPlanShowPage from "../WorkoutPlanShowPage/WorkoutPlanShowPage";
 import ExerciseUpdatePage from "../ExerciseUpdatePage/ExerciseUpdatePage";
+import WorkoutPlanUpdatePage from "../WorkoutPlanUpdatePage/WorkoutPlanUpdatePage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -89,6 +90,10 @@ function App() {
                 element={
                   <NewWorkoutPlanPage handleCreate={handleCreateWorkoutPlan} />
                 }
+              />
+              <Route
+                path="/workoutPlans/:workoutPlan_id/edit"
+                element={<WorkoutPlanUpdatePage />}
               />
               <Route path="*" element={<Navigate to="/" />} />
             </>

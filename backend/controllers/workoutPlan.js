@@ -17,6 +17,9 @@ async function createWorkoutPlan(req, res) {
       planName: req.body.planName,
       goalDescription: req.body.goalDescription,
       targetValue: req.body.targetValue,
+      currentValue: req.body.currentValue,
+      deadline: req.body.deadline,
+      exercises: req.body.exercises,
       user: req.user._id,
     });
     await workoutPlan.save();
@@ -40,15 +43,15 @@ async function indexWorkoutPlan(req, res) {
 async function showWorkoutPlan(req, res) {
   const workoutPlan = await WorkoutPlan.findOne({
     _id: req.params.workoutPlanId,
-    user: req.user._id,
-  });
+    user: req.user._id,    
+  }).populate('exercises'); 
+  console.log('After populate:', workoutPlan);
   if (!workoutPlan)
     return res
       .status(404)
       .json({ error: "Workout Plan not found or not authorized" });
   res.status(200).json(workoutPlan);
 }
-
 
 // Update workout
 async function updateWorkoutPlan(req, res) {

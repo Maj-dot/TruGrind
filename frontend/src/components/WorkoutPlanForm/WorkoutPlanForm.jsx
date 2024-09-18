@@ -40,7 +40,7 @@ const WorkoutPlanForm = (props) => {
 
   const handleChange = (evt) => {
     const { name, value, options } = evt.target;
-    if (name === "exercises") {
+    if (name === 'exercises') {
       const selectedValues = Array.from(options)
         .filter((option) => option.selected)
         .map((option) => option.value);
@@ -115,7 +115,6 @@ const WorkoutPlanForm = (props) => {
               exercises.map((exercise) => (
                 <option key={exercise._id} value={exercise._id}>
                   {exercise.type}{" "}
-                  {/* Adjust this if you want to show a different property */}
                 </option>
               ))}
           </select>

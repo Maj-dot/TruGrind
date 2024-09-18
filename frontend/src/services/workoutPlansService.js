@@ -5,6 +5,8 @@ const workoutPlansService = {
     index, 
     show,
     create,
+    update,
+    deleteWorkoutPlan,
 };
 
 export function index() {
@@ -17,6 +19,14 @@ export function show(workoutPlanId) {
 
 export function create(workoutPlanData) {
     return sendRequest(BASE_URL, `POST`, workoutPlanData);
+}
+
+export function update(workoutPlanId, workoutPlanData) {
+    return sendRequest(`${BASE_URL}/${workoutPlanId}`, 'PUT', workoutPlanData)
+}
+
+export function deleteWorkoutPlan(workoutPlanId) {
+    return sendRequest(`${BASE_URL}/${workoutPlanId}`, 'DELETE')
 }
 
 export default workoutPlansService;
