@@ -1,36 +1,86 @@
-.exercise-card {
-  background: #1e1e1e;
+
+.exerciseList-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #1e1e1e; 
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  margin: 1rem;
-  max-width: 300px;
-  transition: transform 0.3s;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.exercise-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.exercise-card {
+  position: relative;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .exercise-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-.button-container {
+.exercise-card h2 {
+  margin: 0;
+  color: #28a745;
+}
+
+.posted-date {
+  font-size: 0.9em;
+  color: #ccc;
+  margin-bottom: 15px; 
+}
+
+.exercise-buttons {
   display: flex;
-  gap: 0.5rem;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px; 
 }
 
-.view-exercise-link, .delete-button {
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+
+.view-exercise-button,
+.delete-exercise-button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: transform 0.3s ease;
 }
 
-.view-exercise-link {
-  background-color: #1db954; 
-  color: #ffffff;
-  text-decoration: none;
+
+.view-exercise-button {
+  background-color: #28a745;
+  color: white;
 }
 
-.delete-button {
-  background-color: #ff4d4f; 
-  color: #ffffff;
+.view-exercise-button:hover {
+  background-color: #218838;
+  transform: scale(1.1);
+}
+
+
+.delete-exercise-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-exercise-button:hover {
+  background-color: #c82333;
+  transform: scale(1.1);
+}
+
+.error-message {
+  color: red;
+  text-align: center;
 }

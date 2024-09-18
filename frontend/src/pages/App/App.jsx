@@ -8,24 +8,33 @@ import SignUpPage from "../SignUpPage/SignUpPage";
 import LoginPage from "../LogInPage/LogInPage";
 import Navbar from "../../components/NavBar/NavBar";
 import exercisesService from "../../services/exercisesService";
+import workoutPlansService from "../../services/workoutPlansService";
 import HomePage from "../HomePage/HomePage";
 import DashboardPage from "../DashboardPage/DashboardPage";
 import NewExercisePage from "../NewExercisePage/NewExercisePage";
+import NewWorkoutPlanPage from "../NewWorkoutPlanPage/NewWorkoutPlanPage";
 import ExerciseListPage from "../ExerciseListPage/ExerciseListPage";
-import ExerciseShowPage from "../ExerciseShowPage/ExerciseShowPage";
-import ExerciseUpdatePage from "../ExerciseUpdatePage/ExerciseUpdatePage";
 import WorkoutPlanListPage from "../WorkoutPlanListPage/WorkoutPlanListPage";
+import ExerciseShowPage from "../ExerciseShowPage/ExerciseShowPage";
 import WorkoutPlanShowPage from "../WorkoutPlanShowPage/WorkoutPlanShowPage";
+import ExerciseUpdatePage from "../ExerciseUpdatePage/ExerciseUpdatePage";
 
 function App() {
   const [user, setUser] = useState(getUser());
   const [exercises, setExercises] = useState([]);
+  const [workoutPlans, setWorkoutPlans] = useState([]);
   const navigate = useNavigate();
 
   const handleCreate = async (exerciseForm) => {
     const newExercise = await exercisesService.create(exerciseForm);
     setExercises([newExercise, ...exercises]);
     navigate("/exercises");
+  };
+
+  const handleCreateWorkoutPlan = async (workoutPlanForm) => {
+    const newWorkoutPlan = await workoutPlansService.create(workoutPlanForm);
+    setWorkoutPlans([newWorkoutPlan, ...workoutPlans]);
+    navigate("/workoutPlans");
   };
 
   useEffect(() => {
@@ -35,6 +44,15 @@ function App() {
       setExercises(exerciseData);
     };
     fetchAllExercises();
+  }, []);
+
+  useEffect(() => {
+    const fetchAllWorkoutPlans = async () => {
+      const workoutPlanData = await workoutPlansService.index();
+      console.log("Fetched workout plans:", workoutPlanData);
+      setWorkoutPlans(workoutPlanData);
+    };
+    fetchAllWorkoutPlans();
   }, []);
 
   return (
@@ -57,9 +75,21 @@ function App() {
                 path="/exercises/:exercise_id"
                 element={<ExerciseShowPage />}
               />
-              <Route path="/exercises/:exercise_id/edit" element={<ExerciseUpdatePage />} />
+              <Route
+                path="/exercises/:exercise_id/edit"
+                element={<ExerciseUpdatePage />}
+              />
               <Route path="/workoutPlans" element={<WorkoutPlanListPage />} />
-              <Route path="/workoutPlans/:workoutPlan_id" element={<WorkoutPlanShowPage />} />
+              <Route
+                path="/workoutPlans/:workoutPlan_id"
+                element={<WorkoutPlanShowPage />}
+              />
+              <Route
+                path="/workoutPlans/new"
+                element={
+                  <NewWorkoutPlanPage handleCreate={handleCreateWorkoutPlan} />
+                }
+              />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           ) : (

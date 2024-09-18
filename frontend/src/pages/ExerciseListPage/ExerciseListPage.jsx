@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import exercisesService from "../../services/exercisesService";
-import "./ExerciseListPage.css";
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import exercisesService from '../../services/exercisesService';
+import './ExerciseListPage.css'; // Import the CSS file for styling
 
 export default function ExerciseListPage() {
   const [exercises, setExercises] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,49 +14,46 @@ export default function ExerciseListPage() {
         const fetchedExercises = await exercisesService.index();
         setExercises(fetchedExercises);
       } catch (err) {
-        console.error("Error fetching exercises:", err);
+        console.error('Error fetching exercises:', err);
+        setError('Failed to load exercises.');
       }
     }
     fetchExercises();
   }, []);
 
-  async function handleDelete(exerciseId) {
+  const handleDelete = async (exerciseId) => {
     try {
-      console.log(exerciseId);
-      await exercisesService.deleteExercise(exerciseId);
-      setExercises((prevExercises) =>
-        prevExercises.filter((e) => e._id !== exerciseId)
-      );
-      navigate("/exercises");
+      await exercisesService.delete(exerciseId);
+      setExercises(exercises.filter((exercise) => exercise._id !== exerciseId));
     } catch (err) {
-      console.error("Error deleting exercise:", err);
+      console.error('Error deleting exercise:', err);
     }
-  }
+  };
 
   return (
-    <main>
-      <div className="exercise-card">
-        {exercises && exercises.length > 0 ? (
+    <main className="exerciseList-container">
+      {error && <p className="error-message">{error}</p>}
+      <div className="exercise-card-container">
+        {exercises.length > 0 ? (
           exercises.map((exercise) => (
-            <div key={exercise._id}>
+            <div className="exercise-card" key={exercise._id}>
               <article>
                 <header>
-                  <h2>{exercise.exercise_id}</h2>
-                  <p>
-                    {exercise.user.username} posted on{" "}
-                    {new Date(exercise.createdAt).toLocaleDateString()}
+                  <h2>{exercise.type}</h2>
+                  <p className="posted-date">
+                    Posted on {new Date(exercise.createdAt).toLocaleDateString()}
                   </p>
                 </header>
-                <p>{exercise.text}</p>
-                <div className="button-container">
-                  <Link
-                    to={`/exercises/${exercise._id}`}
-                    className="view-exercise-link"
+                {/* Button container */}
+                <div className="exercise-buttons">
+                  <button
+                    className="view-exercise-button"
+                    onClick={() => navigate(`/exercises/${exercise._id}`)}
                   >
                     View Exercise
-                  </Link>
+                  </button>
                   <button
-                    className="delete-button"
+                    className="delete-exercise-button"
                     onClick={() => handleDelete(exercise._id)}
                   >
                     Delete
@@ -65,7 +63,7 @@ export default function ExerciseListPage() {
             </div>
           ))
         ) : (
-          <p>If you want to stay true to the grind, add an exercise!</p>
+          <p>No exercises available. Add a new one!</p>
         )}
       </div>
     </main>
