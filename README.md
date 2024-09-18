@@ -25,4 +25,4 @@ The app allows users to log new workouts, update their progress, and keep track 
 Feel free to contribute to TruGrind by submitting a pull request. Please ensure your changes align with the project goals and have been tested.
 
 ## Contact
-If you have any questions or feedback, please reach out to me at [your.email@example.com].
+If you have any questions or feedback, please reach out to me 
