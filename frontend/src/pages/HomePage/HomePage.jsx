@@ -14,6 +14,13 @@ export default function HomePage() {
         <button className="cta-button" onClick={() => navigate("/signup")}>
           Sign Up Now
         </button>
+        <div className="image-container">
+          <img
+            src="/public/TruGrind imgs/TruGrind Photo.png"
+            alt="Achieve Your Goals"
+            className="homepage-image"
+          />
+        </div>
       </header>
       <section className="features">
         <h2>Features</h2>
