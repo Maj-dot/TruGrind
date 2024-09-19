@@ -7,7 +7,7 @@ export default function NewWorkoutPlanPage() {
 
   function handleCreateWorkoutPlan(formData) {
     console.log("Data passed to create function:", formData);
-    create(formData) 
+    create(formData)
       .then(() => {
         navigate("/workoutPlans");
       })

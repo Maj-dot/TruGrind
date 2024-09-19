@@ -10,7 +10,7 @@ const ExerciseForm = (props) => {
     weight: "",
     reps: "",
     sets: "",
-    date: "",
+    //date: "",
   });
 
   const handleChange = (evt) => {

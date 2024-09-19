@@ -6,7 +6,7 @@ const exercisesService = {
   index,
   show,
   update,
-  deleteExercise  
+  deleteExercise,
 };
 
 export function index() {
@@ -14,6 +14,7 @@ export function index() {
 }
 
 export function create(exerciseData) {
+  console.log(exerciseData);
   return sendRequest(BASE_URL, `POST`, exerciseData);
 }
 
@@ -22,11 +23,11 @@ export function show(exerciseId) {
 }
 
 export function update(exerciseId, exerciseData) {
-  return sendRequest(`${BASE_URL}/${exerciseId}`, 'PUT', exerciseData);
+  return sendRequest(`${BASE_URL}/${exerciseId}`, "PUT", exerciseData);
 }
 
 export function deleteExercise(exerciseId) {
-  return sendRequest(`${BASE_URL}/${exerciseId}`, 'DELETE');
+  return sendRequest(`${BASE_URL}/${exerciseId}`, "DELETE");
 }
 
 export default exercisesService;

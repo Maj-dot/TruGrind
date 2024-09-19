@@ -16,7 +16,7 @@ export default function NavBar({ user, setUser }) {
         <>
           <Link to="/exercises">Exercises</Link>
           &nbsp; | &nbsp;
-          <Link to="/exercises/new">Add Exercise</Link>
+          <Link to="/exercises/new">Add A Grind</Link>
           &nbsp; | &nbsp;
           <Link to="" onClick={handleLogOut}>
             Log Out

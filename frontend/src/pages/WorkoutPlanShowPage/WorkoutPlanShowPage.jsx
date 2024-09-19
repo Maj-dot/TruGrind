@@ -1,42 +1,61 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from 'react-router-dom';
-import workoutPlansService from '../../services/workoutPlansService';
+import { useParams, useNavigate, Link } from "react-router-dom";
+import workoutPlansService from "../../services/workoutPlansService";
 
 export default function WorkoutPlanShowPage() {
-    const { workoutPlan_id } = useParams();
-    const [workoutPlan, setWorkoutPlan] = useState(null);
+  const { workoutPlanId } = useParams();
+  const navigate = useNavigate();
+  const [workoutPlan, setWorkoutPlan] = useState(null);
+console.log(workoutPlanId);
+  useEffect(() => {
+    async function fetchWorkoutPlan() {
+      try {
+        const fetchedWorkoutPlan = await workoutPlansService.show(
+          workoutPlanId
+        );
+        setWorkoutPlan(fetchedWorkoutPlan);
+      } catch (err) {
+        console.error("Error fetching workout plan:", err);
+      }
+    }
+    fetchWorkoutPlan();
+  }, [workoutPlanId]);
 
-    useEffect(() => {
-        async function fetchWorkoutPlan() {
-            try {
-                const fetchedWorkoutPlan = await workoutPlansService.show(workoutPlan_id);
-                setWorkoutPlan(fetchedWorkoutPlan);
-            } catch (err) {
-                console.error('Error fetching exerice:', err);
-            }
-        }
-        fetchWorkoutPlan();
-    }, [workoutPlan_id]);
+  async function handleDelete() {
+    try {
+      await workoutPlansService.deleteWorkoutPlan(workoutPlanId);
+      navigate("/workoutPlans");
+    } catch (err) {
+      console.error("Error deleting workout plan:", err);
+    }
+  }
 
-    if (!workoutPlan) return <p>Loading...</p>
+  if (!workoutPlan) return <p>Loading...</p>;
 
-    return (
-        <main>
-            <div className="workoutPlan-card">
-                <article>
-                <header>
-                    <h2>{workoutPlan.workoutPlan_id}</h2>
-                </header>
-                <p>planName: {workoutPlan.planName}</p>
-                <p>goalDescription: {workoutPlan.goalDescription}</p>
-                <p>targetValue: {workoutPlan.targetValue}</p>
-                <p>currentValue: {workoutPlan.currentValue}</p>
-                <p>deadline: {workoutPlan.deadline}</p>
-                <p>exercises: {workoutPlan.exercises}</p>
-                </article>
-                <Link to="/workoutPlans/">Back to Workout Plans</Link>
-            </div>
-        </main>
-    )
+  return (
+    <div>
+      <div className="workoutPlan-card">
+        <article>
+          <h2>{workoutPlan.planName}</h2>
+          <p>
+            <strong>Goal Description:</strong> {workoutPlan.goalDescription}
+          </p>
+          <p>
+            <strong>Target Value:</strong> {workoutPlan.targetValue}
+          </p>
+          <p>
+            <strong>Current Value:</strong> {workoutPlan.currentValue}
+          </p>
+          <p>
+            <strong>Deadline:</strong> {workoutPlan.deadline}
+          </p>
+          <p>
+            <strong>Exercises:</strong> {workoutPlan.exercises.join(", ")}
+          </p>
+        </article>
+        <button onClick={handleDelete}>Delete Workout Plan</button>
+        <Link to="/workoutPlans">Back to Workout Plans</Link>
+      </div>
+    </div>
+  );
 }

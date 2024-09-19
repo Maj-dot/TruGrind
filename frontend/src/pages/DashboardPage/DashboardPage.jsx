@@ -20,9 +20,12 @@ export default function DashboardPage() {
             <h3>Workout Log</h3>
             <p>View and manage your workouts.</p>
           </div>
-          <div className="dashboard-feature-item">
-            <h3>Progress Reports</h3>
-            <p>Track your fitness progress over time.</p>
+          <div
+            className="dashboard-feature-item"
+            onClick={() => navigate("/progress")}
+          >
+            <h3>Progress Report</h3>
+            <p>View and manage your progress.</p>
           </div>
           <div className="dashboard-feature-item">
             <h3>Set Goals</h3>

@@ -17,11 +17,13 @@ const WorkoutPlanForm = (props) => {
       try {
         const response = await fetch("/api/exercises");
         const data = await response.json();
+        console.log("Fetched exercises:", data);
         setExercises(data);
       } catch (error) {
         console.error("Error fetching exercises:", error);
       }
     }
+    console.log("Fething exercises");
     fetchExercises();
   }, []);
 
@@ -93,7 +95,7 @@ const WorkoutPlanForm = (props) => {
             name="exercises"
             value={formData.exercises}
             onChange={handleChange}
-            multiple // Enable multiple selections
+            multiple
           >
             <option value="" disabled>
               --Select exercises--

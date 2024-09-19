@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import exercisesService from '../../services/exercisesService';
-import './ExerciseListPage.css'; // Import the CSS file for styling
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import exercisesService from "../../services/exercisesService";
+import "./ExerciseListPage.css";
 
 export default function ExerciseListPage() {
   const [exercises, setExercises] = useState([]);
@@ -14,8 +14,8 @@ export default function ExerciseListPage() {
         const fetchedExercises = await exercisesService.index();
         setExercises(fetchedExercises);
       } catch (err) {
-        console.error('Error fetching exercises:', err);
-        setError('Failed to load exercises.');
+        console.error("Error fetching exercises:", err);
+        setError("Failed to load exercises.");
       }
     }
     fetchExercises();
@@ -23,10 +23,10 @@ export default function ExerciseListPage() {
 
   const handleDelete = async (exerciseId) => {
     try {
-      await exercisesService.delete(exerciseId);
+      await exercisesService.deleteExercise(exerciseId);
       setExercises(exercises.filter((exercise) => exercise._id !== exerciseId));
     } catch (err) {
-      console.error('Error deleting exercise:', err);
+      console.error("Error deleting exercise:", err);
     }
   };
 
@@ -39,9 +39,10 @@ export default function ExerciseListPage() {
             <div className="exercise-card" key={exercise._id}>
               <article>
                 <header>
-                  <h2>{exercise.type}</h2>
+                  <h2>{exercise.exercise_id}</h2>
                   <p className="posted-date">
-                    Posted on {new Date(exercise.createdAt).toLocaleDateString()}
+                    Posted on{" "}
+                    {new Date(exercise.createdAt).toLocaleDateString()}
                   </p>
                 </header>
                 {/* Button container */}
