@@ -47,6 +47,7 @@ async function show(req, res) {
 
 // Update exercise
 async function update(req, res) {
+  console.log(req.body);
   try {
     const exerciseId = req.params.exerciseId;
     console.log("Exercise ID:", req.params.exerciseId);

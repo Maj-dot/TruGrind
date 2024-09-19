@@ -20,7 +20,7 @@ console.log(workoutPlanId);
     }
     fetchWorkoutPlan();
   }, [workoutPlanId]);
-
+console.log(workoutPlan);
   async function handleDelete() {
     try {
       await workoutPlansService.deleteWorkoutPlan(workoutPlanId);
@@ -50,7 +50,9 @@ console.log(workoutPlanId);
             <strong>Deadline:</strong> {workoutPlan.deadline}
           </p>
           <p>
-            <strong>Exercises:</strong> {workoutPlan.exercises.join(", ")}
+            <strong>Exercises:</strong> {workoutPlan.exercises.map((exercise, index) =>(
+              <li key= {index}>{exercise.exerciseid}</li>
+            ))}
           </p>
         </article>
         <button onClick={handleDelete}>Delete Workout Plan</button>

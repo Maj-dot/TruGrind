@@ -26,7 +26,7 @@ export default function ExerciseShowPage() {
       <div className="exercise-card">
         <article>
           <header>
-            <h2>{exercise.exercise_id}</h2>
+            <h2>{exercise.exerciseid}</h2>
           </header>
           <p>Type: {exercise.type}</p>
           <p>{exercise.duration} Mins</p>

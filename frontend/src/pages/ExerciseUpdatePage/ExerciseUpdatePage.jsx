@@ -6,6 +6,7 @@ export default function ExerciseUpdatePage() {
   const { exercise_id } = useParams();
   const navigate = useNavigate();
   const [exercise, setExercise] = useState({
+    exerciseid: "",
     type: "",
     duration: "",
     reps: "",
@@ -17,7 +18,7 @@ export default function ExerciseUpdatePage() {
   useEffect(() => {
     async function fetchExercise() {
       try {
-        const fetchedExercise = await exercisesService.index();
+        const fetchedExercise = await exercisesService.show(exercise_id);
         setExercise(fetchedExercise);
       } catch (err) {
         console.error("Error fetching exercise:", err);
@@ -31,14 +32,14 @@ export default function ExerciseUpdatePage() {
     console.log("Exercise ID:", exercise_id);
     console.log("Exercise Data:", exercise);
     try {
-      await exercisesService.update(exercise_id, exercise);
+      await exercisesService.update(exercise._id, exercise);
       navigate(`/exercises`);
     } catch (err) {
       console.error("Error updating exercise:", err);
     }
     navigate("/exercises");
   }
-
+console.log(exercise);
   function handleChange(evt) {
     const { name, value } = evt.target;
     setExercise({ ...exercise, [name]: value });
@@ -56,7 +57,7 @@ export default function ExerciseUpdatePage() {
             type="text"
             name="exerciseid"
             id="exercise_id-input"
-            value={exercise.exercise_id}
+            value={exercise.exerciseid}
             onChange={handleChange}
           />
           <label htmlFor="type-input">Type</label>
