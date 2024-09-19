@@ -41,6 +41,7 @@ async function indexWorkoutPlan(req, res) {
 
 // Show workout
 async function showWorkoutPlan(req, res) {
+  console.log(req.params);
   const workoutPlan = await WorkoutPlan.findOne({
     _id: req.params.workoutPlanId,
     user: req.user._id,    
@@ -58,7 +59,8 @@ async function updateWorkoutPlan(req, res) {
     try {
         
       const workoutPlanId = req.params.workoutPlanId;
-      const userId = req.user._id;    
+      const userId = req.user._id;  
+      console.log("Received workoutPlanId:", workoutPlanId);
       if (!mongoose.Types.ObjectId.isValid(workoutPlanId)) {
         return res.status(400).json({ err: "Invalid workout plan ID format." });
       }

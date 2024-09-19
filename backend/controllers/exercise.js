@@ -49,6 +49,7 @@ async function show(req, res) {
 async function update(req, res) {
   try {
     const exerciseId = req.params.exerciseId;
+    console.log("Exercise ID:", req.params.exerciseId);
     const userId = req.user._id;    
     if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
       return res.status(400).json({ err: "Invalid exercise ID format." });

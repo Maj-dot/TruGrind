@@ -1,90 +1,126 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import workoutPlansService from '../../services/workoutPlansService';
 
-const WorkoutPlanUpdatePage = () => {
-    const { workoutPlan_id } = useParams();
-    const [formData, setFormData] = useState({
-        planName: '',
-        goalDescription: '',
-        targetValue: '',
-        currentValue: '',
-        deadline: ''
-    });
-    const navigate = useNavigate();
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import workoutPlansService from "../../services/workoutPlansService";
+import exercisesService from "../../services/exercisesService";
 
-    useEffect(() => {
-        async function fetchWorkoutPlan() {
-            try {
-                const workoutPlan = await workoutPlansService.show(workoutPlan_id);
-                setFormData({
-                    planName: workoutPlan.planName,
-                    goalDescription: workoutPlan.goalDescription,
-                    targetValue: workoutPlan.targetValue,
-                    currentValue: workoutPlan.currentValue,
-                    deadline: workoutPlan.deadline
-                });
-            } catch (error) {
-                console.error('Error fetching workout plan:', error);
-            }
-        }
-        fetchWorkoutPlan();
-    }, [workoutPlan_id]);
+export default function UpdateWorkoutPlanPage() {
+  const { workoutPlanId } = useParams();
+  const navigate = useNavigate();
+  const [workoutPlan, setWorkoutPlan] = useState({
+    planName: "",
+    goalDescription: "",
+    targetValue: "",
+    currentValue: "",
+    deadline: "",
+    exercises: [],
+  });
+  const [exercises, setExercises] = useState([]);
 
-    const handleChange = (evt) => {
-        setFormData({ ...formData, [evt.target.name]: evt.target.value });
-    };
+  useEffect(() => {
+    async function fetchWorkoutPlan() {
+        console.log("Workout Plan ID:", workoutPlanId);
+      try {
+        const fetchedWorkoutPlan = await workoutPlansService.show(workoutPlanId);
+        setWorkoutPlan(fetchedWorkoutPlan);
+      } catch (err) {
+        console.error("Error fetching workout plan:", err);
+      }
+    }
 
-    const handleSubmit = async (evt) => {
-        evt.preventDefault();
-        try {
-            await workoutPlansService.update(workoutPlan_id, formData);
-            navigate(`/workoutPlans/${workoutPlan_id}`);
-        } catch (error) {
-            console.error('Error updating workout plan:', error);
-        }
-    };
+    async function fetchExercises() {
+      try {
+        const fetchedExercises = await exercisesService.index();
+        setExercises(fetchedExercises);
+      } catch (err) {
+        console.error("Error fetching exercises:", err);
+      }
+    }
+    fetchWorkoutPlan();
+    fetchExercises();
+  }, [workoutPlanId]);
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <label>Plan Name</label>
-            <input
-                type="text"
-                name="planName"
-                value={formData.planName}
-                onChange={handleChange}
-            />
-            <label>Goal Description</label>
-            <input
-                type="text"
-                name="goalDescription"
-                value={formData.goalDescription}
-                onChange={handleChange}
-            />
-            <label>Target Value</label>
-            <input
-                type="number"
-                name="targetValue"
-                value={formData.targetValue}
-                onChange={handleChange}
-            />
-            <label>Current Value</label>
-            <input
-                type="number"
-                name="currentValue"
-                value={formData.currentValue}
-                onChange={handleChange}
-            />
-            <label>Deadline</label>
-            <input
-                type="date"
-                name="deadline"
-                value={formData.deadline}
-                onChange={handleChange}
-            />
-            <button type="submit">Update Workout Plan</button>
-        </form>
-    );
-};
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setWorkoutPlan((prevWorkoutPlan) => ({
+      ...prevWorkoutPlan,
+      [name]: value,
+    }));
+  }
 
-export default WorkoutPlanUpdatePage;
+  async function handleUpdate(e) {
+    e.preventDefault();
+    try {
+      await workoutPlansService.update(workoutPlanId, workoutPlan);
+      navigate(`/workoutPlans/${workoutPlanId}`);
+    } catch (err) {
+      console.error("Error updating workout plan:", err);
+    }
+  }
+
+  return (
+    <div>
+      <h1>Update Workout Plan</h1>
+      <form className="workoutPlan-form-container" onSubmit={handleUpdate}>
+      <label htmlFor="planName_input">Plan Name</label>
+          <input
+            type="text"
+            id="planName_input"
+            name="planName"
+            value={workoutPlan.planName}
+            onChange={handleChange}
+          />
+          <label htmlFor="goalDescription_input">Goal Description</label>
+          <textarea
+            id="goalDescription_input"
+            name="goalDescription"
+            value={workoutPlan.goalDescription}
+            onChange={handleChange}
+          />
+          <label htmlFor="targetValue_input">Target Value</label>
+          <input
+            type="number"
+            id="targetValue_input"
+            name="targetValue"
+            value={workoutPlan.targetValue}
+            onChange={handleChange}
+          />
+          <label htmlFor="currentValue_input">Current Value</label>
+          <input
+            type="number"
+            id="currentValue_input"
+            name="currentValue"
+            value={workoutPlan.currentValue}
+            onChange={handleChange}
+          />
+          <label htmlFor="deadline_input">Deadline</label>
+          <input
+            type="date"
+            id="deadline_input"
+            name="deadline"
+            value={workoutPlan.deadline}
+            onChange={handleChange}
+          />
+        <label htmlFor="exercises_input">Select Exercise</label>
+        <select
+          id="exercises_input"
+          name="exercises"
+          value={workoutPlan.exercises}
+          onChange={handleChange}
+          multiple
+        >
+          <option value="" disabled>
+            --Select exercises--
+          </option>
+          {exercises.map((exercise) => (
+            <option key={exercise._id} value={exercise._id}>
+              {exercise.type}
+            </option>
+          ))}
+        </select>
+        <button type="submit">Update Workout Plan</button>
+      </form>
+    </div>
+  );
+}
+

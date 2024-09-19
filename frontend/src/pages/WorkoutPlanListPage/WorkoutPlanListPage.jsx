@@ -1,7 +1,7 @@
-import { useNavigate, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import workoutPlansService from '../../services/workoutPlansService';
-import './WorkoutPlanListPage.css'; // Import the CSS file
+import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import workoutPlansService from "../../services/workoutPlansService";
+import "./WorkoutPlanListPage.css"; // Import the CSS file
 
 export default function WorkoutPlanListPage() {
   const [workoutPlans, setWorkoutPlans] = useState([]);
@@ -14,8 +14,8 @@ export default function WorkoutPlanListPage() {
         const fetchedWorkoutPlans = await workoutPlansService.index();
         setWorkoutPlans(fetchedWorkoutPlans);
       } catch (err) {
-        console.error('Error fetching workout plans:', err);
-        setError('Failed to load workout plans.');
+        console.error("Error fetching workout plans:", err);
+        setError("Failed to load workout plans.");
       }
     }
     fetchWorkoutPlans();
@@ -32,10 +32,14 @@ export default function WorkoutPlanListPage() {
                 <header>
                   <h2>{workoutPlan.planName}</h2>
                   <p className="posted-date">
-                    Posted on {new Date(workoutPlan.createdAt).toLocaleDateString()}
+                    Posted on{" "}
+                    {new Date(workoutPlan.createdAt).toLocaleDateString()}
                   </p>
                 </header>
-                <Link to={`/workoutPlans/${workoutPlan._id}`} className="view-workoutPlan-link">
+                <Link
+                  to={`/workoutPlans/${workoutPlan._id}`}
+                  className="view-workoutPlan-link"
+                >
                   View Workout Plan
                 </Link>
               </article>
@@ -45,9 +49,10 @@ export default function WorkoutPlanListPage() {
           <p>No workout plans available. Add a new one!</p>
         )}
       </div>
-
-      {/* Add a button to create a new workout plan */}
-      <button className="create-workoutPlan-button" onClick={() => navigate('/workoutPlans/new')}>
+      <button
+        className="create-workoutPlan-button"
+        onClick={() => navigate("/workoutPlans/new")}
+      >
         Add New
       </button>
     </main>

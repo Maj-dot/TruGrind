@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import exercisesService from "../../services/exercisesService";
-import { deleteExercise } from "../../services/exercisesService";
 import "./ExerciseListPage.css";
 
 export default function ExerciseListPage() {
@@ -9,13 +8,17 @@ export default function ExerciseListPage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const refreshExercises = async () => {
-    try {
-      const fetchedExercises = await exercisesService.index();
-      setExercises(fetchedExercises);
-    } catch (err) {
-      console.error("Error fetching exercises:", err);
-      setError("Failed to load exercises.");
+
+  useEffect(() => {
+    async function fetchExercises() {
+      try {
+        const fetchedExercises = await exercisesService.index();
+        setExercises(fetchedExercises);
+      } catch (err) {
+        console.error("Error fetching exercises:", err);
+        setError("Failed to load exercises.");
+      }
+
     }
   };
 
@@ -25,7 +28,9 @@ export default function ExerciseListPage() {
 
   const handleDelete = async (exerciseId) => {
     try {
-      await deleteExercise(exerciseId);
+
+      await exercisesService.deleteExercise(exerciseId);
+
       setExercises(exercises.filter((exercise) => exercise._id !== exerciseId));
     } catch (err) {
       console.error("Error deleting exercise:", err);
@@ -40,10 +45,30 @@ export default function ExerciseListPage() {
           exercises.map((exercise) => (
             <div className="exercise-card" key={exercise._id}>
               <article>
-                <h2>{exercise.exerciseid}</h2>
-                <p className="posted-date">
-                  Posted on {new Date(exercise.createdAt).toLocaleDateString()}
-                </p>
+
+                <header>
+                  <h2>{exercise.exercise_id}</h2>
+                  <p className="posted-date">
+                    Posted on{" "}
+                    {new Date(exercise.createdAt).toLocaleDateString()}
+                  </p>
+                </header>
+                {/* Button container */}
+                <div className="exercise-buttons">
+                  <button
+                    className="view-exercise-button"
+                    onClick={() => navigate(`/exercises/${exercise._id}`)}
+                  >
+                    View Exercise
+                  </button>
+                  <button
+                    className="delete-exercise-button"
+                    onClick={() => handleDelete(exercise._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+
               </article>
 
               <div className="exercise-buttons">

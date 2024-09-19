@@ -1,71 +1,62 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import  workoutPlansService from "../../services/workoutPlansService";
-import { deleteWorkoutPlan } from "../../services/workoutPlansService";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import workoutPlansService from "../../services/workoutPlansService";
 
 export default function WorkoutPlanShowPage() {
-  const { workoutPlan_id } = useParams();
-  const [workoutPlan, setWorkoutPlan] = useState(null);
+  const { workoutPlanId } = useParams();
   const navigate = useNavigate();
-
+  const [workoutPlan, setWorkoutPlan] = useState(null);
+console.log(workoutPlanId);
   useEffect(() => {
     async function fetchWorkoutPlan() {
       try {
         const fetchedWorkoutPlan = await workoutPlansService.show(
-          workoutPlan_id
+          workoutPlanId
         );
-        console.log(fetchedWorkoutPlan);
         setWorkoutPlan(fetchedWorkoutPlan);
       } catch (err) {
-        console.error("Error fetching exerice:", err);
+        console.error("Error fetching workout plan:", err);
       }
     }
     fetchWorkoutPlan();
-  }, [workoutPlan_id]);
+  }, [workoutPlanId]);
 
-  if (!workoutPlan) return <p>Loading...</p>;
-
-  const handleEdit = () => {
-    navigate(`/workoutPlans/${workoutPlan._id}/edit`);
-  };
-
-  const handleDelete = async () => {
+  async function handleDelete() {
     try {
-      await deleteWorkoutPlan(workoutPlan_id);
+      await workoutPlansService.deleteWorkoutPlan(workoutPlanId);
       navigate("/workoutPlans");
     } catch (err) {
       console.error("Error deleting workout plan:", err);
     }
-  };
+  }
+
+  if (!workoutPlan) return <p>Loading...</p>;
 
   return (
-    <main>
+    <div>
       <div className="workoutPlan-card">
         <article>
-          <header>
-            <h2>{workoutPlan.workoutPlan_id}</h2>
-          </header>
-          <p>Plan name: {workoutPlan.planName}</p>
-          <p>TruGrind Goal: {workoutPlan.goalDescription}</p>
-          <p>Target Weight: {workoutPlan.targetValue}</p>
-          <p>Current Weight: {workoutPlan.currentValue || "N/A"}</p>
-          <p>Deadline: {workoutPlan.deadline || "No deadline set"}</p>
-          <p>Exercises:</p>
-          <ul>
-            {workoutPlan.exercises && workoutPlan.exercises.length > 0 ? (
-              workoutPlan.exercises.map((exercise, index) => (
-                <li key={index}>{exercise.exerciseid || "Unnamed exercise"}</li>
-              ))
-            ) : (
-              <li>No exercises added</li>
-            )}
-          </ul>
+          <h2>{workoutPlan.planName}</h2>
+          <p>
+            <strong>Goal Description:</strong> {workoutPlan.goalDescription}
+          </p>
+          <p>
+            <strong>Target Value:</strong> {workoutPlan.targetValue}
+          </p>
+          <p>
+            <strong>Current Value:</strong> {workoutPlan.currentValue}
+          </p>
+          <p>
+            <strong>Deadline:</strong> {workoutPlan.deadline}
+          </p>
+          <p>
+            <strong>Exercises:</strong> {workoutPlan.exercises.join(", ")}
+          </p>
         </article>
-        <button onClick={handleEdit}>Edit Workout</button>
-        <button onClick={handleDelete}>Delete Workout</button>
-        <Link to="/workoutPlans/">Back to Workout Plans</Link>
+        <button onClick={handleDelete}>Delete Workout Plan</button>
+        <Link to="/workoutPlans">Back to Workout Plans</Link>
       </div>
-    </main>
+    </div>
+
   );
 }

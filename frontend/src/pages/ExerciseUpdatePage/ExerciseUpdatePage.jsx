@@ -35,7 +35,7 @@ export default function ExerciseUpdatePage() {
       navigate(`/exercises`);
     } catch (err) {
       console.error("Error updating exercise:", err);
-    } 
+    }
     navigate("/exercises");
   }
 
@@ -48,7 +48,9 @@ export default function ExerciseUpdatePage() {
     <main>
       <div className="exercise-form-container">
         <form className="exercise-form" onSubmit={handleUpdate}>
-        <label htmlFor="exerciseid-input">Exercise</label>
+
+          <label htmlFor="exercise_id-input">Exercise</label>
+
           <input
             required
             type="text"
@@ -126,7 +128,6 @@ export default function ExerciseUpdatePage() {
             value={exercise.date}
             onChange={handleChange}
           />
-         
           <button type="submit">Update The Grind!</button>
         </form>
       </div>

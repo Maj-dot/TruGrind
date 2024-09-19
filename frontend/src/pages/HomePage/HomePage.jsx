@@ -15,7 +15,6 @@ export default function HomePage() {
           Sign Up Now
         </button>
       </header>
-
       <section className="features">
         <h2>Features</h2>
         <div className="feature-list">

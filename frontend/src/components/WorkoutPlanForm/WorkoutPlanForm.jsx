@@ -28,13 +28,13 @@ const WorkoutPlanForm = (props) => {
         }
   
         const data = await response.json();
-        console.log('Fetched exercises:', data);
+
         setExercises(data);
       } catch (error) {
         console.error('Error fetching exercises:', error);
       }
     }
-  
+
     fetchExercises();
   }, []);
 
