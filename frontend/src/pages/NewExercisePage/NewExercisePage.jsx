@@ -6,7 +6,6 @@ export default function NewExercisePage() {
   const navigate = useNavigate();
 
   function handleCreate(formData) {
-    console.log("Data passed to create function:", formData);
     create(formData);
     navigate("/exercises");
   }

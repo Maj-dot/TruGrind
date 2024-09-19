@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const progressCtrl = require('../controllers/progress');
 
-// All routes start with '/api/progress'
+// All paths start with '/api/progress'
 
 // GET '/api/progress'
 router.get('/', progressCtrl.getProgress);

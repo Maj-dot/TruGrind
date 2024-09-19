@@ -52,9 +52,7 @@ const WorkoutPlanForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("Form submitted!");
     props.handleCreate(formData);
-    console.log("handleCreate called with", formData);
   };
 
   return (

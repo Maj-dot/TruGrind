@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const exercise = require("../models/exercise");
 const Exercise = require("../models/exercise");
 
-
 module.exports = {
   create,
   index,
@@ -36,7 +35,6 @@ async function index(req, res) {
 // Show exercise
 async function show(req, res) {
   try {
-    console.log('Exercise ID:', req.params.exerciseId);
     const exercise = await Exercise.findOne({ _id: req.params.exerciseId, user: req.user._id });
     if (!exercise) return res.status(404).json({ error: "Exercise not found or not authorized" });
     res.status(200).json(exercise);
@@ -47,10 +45,8 @@ async function show(req, res) {
 
 // Update exercise
 async function update(req, res) {
-  console.log(req.body);
   try {
     const exerciseId = req.params.exerciseId;
-    console.log("Exercise ID:", req.params.exerciseId);
     const userId = req.user._id;    
     if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
       return res.status(400).json({ err: "Invalid exercise ID format." });

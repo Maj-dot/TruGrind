@@ -29,8 +29,6 @@ export default function ExerciseUpdatePage() {
 
   async function handleUpdate(e) {
     e.preventDefault();
-    console.log("Exercise ID:", exercise_id);
-    console.log("Exercise Data:", exercise);
     try {
       await exercisesService.update(exercise._id, exercise);
       navigate(`/exercises`);
@@ -39,7 +37,6 @@ export default function ExerciseUpdatePage() {
     }
     navigate("/exercises");
   }
-console.log(exercise);
   function handleChange(evt) {
     const { name, value } = evt.target;
     setExercise({ ...exercise, [name]: value });
@@ -49,9 +46,7 @@ console.log(exercise);
     <main>
       <div className="exercise-form-container">
         <form className="exercise-form" onSubmit={handleUpdate}>
-
           <label htmlFor="exercise_id-input">Exercise</label>
-
           <input
             required
             type="text"

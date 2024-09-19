@@ -23,3 +23,5 @@ export function updateProgress(id, progressData) {
 export function deleteProgress(id) {
   return sendRequest(`${BASE_URL}/${id}`, "DELETE");
 }
+
+export default progressService;

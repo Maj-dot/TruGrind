@@ -18,7 +18,6 @@ import WorkoutPlanListPage from "../WorkoutPlanListPage/WorkoutPlanListPage";
 import ExerciseShowPage from "../ExerciseShowPage/ExerciseShowPage";
 import WorkoutPlanShowPage from "../WorkoutPlanShowPage/WorkoutPlanShowPage";
 import ExerciseUpdatePage from "../ExerciseUpdatePage/ExerciseUpdatePage";
-
 import WorkoutPlanpdatePage from "../WorkoutPlanUpdatePage/WorkoutPlanUpdatePage";
 import ProgressReportPage from "../ProgressReportPage/ProgressReportPage";
 
@@ -94,7 +93,6 @@ function App() {
                 }
               />
               <Route
-
                 path="/workoutPlans/:workoutPlanId/edit"
                 element={<WorkoutPlanpdatePage />}
               />

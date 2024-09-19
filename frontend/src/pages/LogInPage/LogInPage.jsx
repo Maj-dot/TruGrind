@@ -15,7 +15,7 @@ export default function LogInPage({ setUser }) {
       setUser(user);
     } catch (err) {
       // An error occurred
-      setErrorMsg("Log In Failed - Try Again");
+      setErrorMsg("Log In Failed - Try Again", err);
     }
   }
 

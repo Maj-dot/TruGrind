@@ -19,7 +19,6 @@ export default function UpdateWorkoutPlanPage() {
 
   useEffect(() => {
     async function fetchWorkoutPlan() {
-        console.log("Workout Plan ID:", workoutPlanId);
       try {
         const fetchedWorkoutPlan = await workoutPlansService.show(workoutPlanId);
         setWorkoutPlan(fetchedWorkoutPlan);

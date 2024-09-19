@@ -6,7 +6,7 @@ export default function WorkoutPlanShowPage() {
   const { workoutPlanId } = useParams();
   const navigate = useNavigate();
   const [workoutPlan, setWorkoutPlan] = useState(null);
-console.log(workoutPlanId);
+
   useEffect(() => {
     async function fetchWorkoutPlan() {
       try {
@@ -20,7 +20,7 @@ console.log(workoutPlanId);
     }
     fetchWorkoutPlan();
   }, [workoutPlanId]);
-console.log(workoutPlan);
+
   async function handleDelete() {
     try {
       await workoutPlansService.deleteWorkoutPlan(workoutPlanId);

@@ -7,7 +7,6 @@ module.exports = {
     deleteProgress,
 }
 
-
 //  Get users progress 
 async function getProgress(req,res) {
     try{
@@ -18,10 +17,8 @@ async function getProgress(req,res) {
     }
 }
 
-
 // Add Progress 
 async function addProgress(req, res) {
-    console.log('Add Progress Request:', req.body);
     try {      
         const progress = new Progress({
             user: req.user._id,

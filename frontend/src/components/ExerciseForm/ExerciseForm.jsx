@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./ExerciseFormPage.css";
 
-
 const ExerciseForm = (props) => {
   const [formData, setFormData] = useState({
     exerciseid: "",
@@ -10,7 +9,6 @@ const ExerciseForm = (props) => {
     weight: "",
     reps: "",
     sets: "",
-    //date: "",
   });
 
   const handleChange = (evt) => {
@@ -19,9 +17,7 @@ const ExerciseForm = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("Form submitted!");
     props.handleCreate(formData);
-    console.log("handleCreate called with:", formData);
   };
 
   return (

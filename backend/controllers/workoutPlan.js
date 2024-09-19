@@ -41,12 +41,10 @@ async function indexWorkoutPlan(req, res) {
 
 // Show workout
 async function showWorkoutPlan(req, res) {
-  console.log(req.params);
   const workoutPlan = await WorkoutPlan.findOne({
     _id: req.params.workoutPlanId,
     user: req.user._id,    
   }).populate('exercises'); 
-  console.log('After populate:', workoutPlan);
   if (!workoutPlan)
     return res
       .status(404)
@@ -56,11 +54,9 @@ async function showWorkoutPlan(req, res) {
 
 // Update workout
 async function updateWorkoutPlan(req, res) {
-    try {
-        
+    try {   
       const workoutPlanId = req.params.workoutPlanId;
       const userId = req.user._id;  
-      console.log("Received workoutPlanId:", workoutPlanId);
       if (!mongoose.Types.ObjectId.isValid(workoutPlanId)) {
         return res.status(400).json({ err: "Invalid workout plan ID format." });
       }
@@ -73,8 +69,7 @@ async function updateWorkoutPlan(req, res) {
         return res.status(404).json({ err: "Workout plan not found or not authorized." });
       }
       res.status(200).json(updatedWorkoutPlan);
-    } catch (err) {
-      console.log(err)  
+    } catch (err) {  
       res.status(500).json({ error: "Oops, something went wrong!", err });
     }
   }
