@@ -16,7 +16,7 @@ export default function HomePage() {
         </button>
         <div className="image-container">
           <img
-            src="/public/TruGrind imgs/TruGrind Photo.png"
+            src="/TruGrind.imgs/TruGrindPhoto.png"
             alt="Achieve Your Goals"
             className="homepage-image"
           />
