@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { getProgress } from "../../services/progressService";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import "../ProgressReportPage/ProgressReportPage.css";
 import ProgressForm from "../../components/ProgressForm/ProgressForm";
 import ProgressList from "../../components/ProgressList/ProgressList";
+
 
 export default function ProgressReportPage() {
   const [progressEntries, setProgressEntries] = useState([]);

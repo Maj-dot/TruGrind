@@ -8,8 +8,8 @@ With an intuitive and user-friendly interface, TruGrind makes it easy for users 
 The app allows users to log new workouts, update their progress, and keep track of their goals. Stay motivated, stay on track, and achieve your fitness goals with TruGrind!
 
 ## Screenshot
-![TruGrind Landing Page Screenshot](../TruGrind/frontend/public/TruGrind%20imgs/LandingPage.Screenshot.png)
-![TruGrind User Dashboard Screenshot](../TruGrind/frontend/public/TruGrind%20imgs/DashBoard.Screenshot.png)
+![TruGrind Landing Page Screenshot](/frontend/public/TruGrind.imgs/LandingPage.Screenshot.png)
+![TruGrind User Dashboard Screenshot](/frontend/public/TruGrind.imgs/DashBoard.Screenshot.png)
 
 ## Features
 - **Create and Log Workouts:** Users can create personalized workout plans and log their exercises with details such as duration, type, and intensity.
