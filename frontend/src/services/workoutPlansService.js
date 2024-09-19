@@ -2,11 +2,13 @@ import sendRequest from "./sendRequest";
 
 const BASE_URL = "/api/workoutPlans";
 const workoutPlansService = {
+
   index,
   show,
   create,
   update,
   deleteWorkoutPlan,
+
 };
 
 export function index() {
@@ -23,6 +25,7 @@ export function create(workoutPlanData) {
 }
 
 export function update(workoutPlanId, workoutPlanData) {
+
   return sendRequest(`${BASE_URL}/${workoutPlanId}`, "PUT", workoutPlanData);
 }
 
@@ -31,3 +34,4 @@ export function deleteWorkoutPlan(workoutPlanId) {
 }
 
 export default workoutPlansService;
+

@@ -4,7 +4,7 @@ import "./ExerciseFormPage.css";
 
 const ExerciseForm = (props) => {
   const [formData, setFormData] = useState({
-    exercise_id: "",
+    exerciseid: "",
     type: "",
     duration: "",
     weight: "",
@@ -28,13 +28,13 @@ const ExerciseForm = (props) => {
     <main>
       <div className="exercise-form-container">
         <form className="exercise-form" onSubmit={handleSubmit}>
-          <label htmlFor="exercise_id-input">Exercise</label>
+          <label htmlFor="exerciseid-input">Exercise</label>
           <input
             required
             type="text"
-            name="exercise_id"
+            name="exerciseid"
             id="exercise_id-input"
-            value={formData.exercise_id}
+            value={formData.exerciseid}
             onChange={handleChange}
           />
           <label htmlFor="type-input">Type</label>

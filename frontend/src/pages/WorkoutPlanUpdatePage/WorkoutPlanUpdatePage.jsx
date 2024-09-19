@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import workoutPlansService from "../../services/workoutPlansService";
@@ -122,3 +123,4 @@ export default function UpdateWorkoutPlanPage() {
     </div>
   );
 }
+

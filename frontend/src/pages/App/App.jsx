@@ -18,6 +18,7 @@ import WorkoutPlanListPage from "../WorkoutPlanListPage/WorkoutPlanListPage";
 import ExerciseShowPage from "../ExerciseShowPage/ExerciseShowPage";
 import WorkoutPlanShowPage from "../WorkoutPlanShowPage/WorkoutPlanShowPage";
 import ExerciseUpdatePage from "../ExerciseUpdatePage/ExerciseUpdatePage";
+
 import WorkoutPlanpdatePage from "../WorkoutPlanUpdatePage/WorkoutPlanUpdatePage";
 import ProgressReportPage from "../ProgressReportPage/ProgressReportPage";
 
@@ -27,8 +28,8 @@ function App() {
   const [workoutPlans, setWorkoutPlans] = useState([]);
   const navigate = useNavigate();
 
-  const handleCreate = async (exerciseForm) => {
-    const newExercise = await exercisesService.create(exerciseForm);
+  const handleCreate = async (formData) => {
+    const newExercise = await exercisesService.create(formData);
     setExercises([newExercise, ...exercises]);
     navigate("/exercises");
   };
@@ -93,10 +94,12 @@ function App() {
                 }
               />
               <Route
+
                 path="/workoutPlans/:workoutPlanId/edit"
                 element={<WorkoutPlanpdatePage />}
               />
               <Route path="/progress" element={<ProgressReportPage />} />
+
               <Route path="*" element={<Navigate to="/" />} />
             </>
           ) : (

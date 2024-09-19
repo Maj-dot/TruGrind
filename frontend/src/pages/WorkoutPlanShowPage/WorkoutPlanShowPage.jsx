@@ -57,5 +57,6 @@ console.log(workoutPlanId);
         <Link to="/workoutPlans">Back to Workout Plans</Link>
       </div>
     </div>
+
   );
 }

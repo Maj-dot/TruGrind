@@ -15,21 +15,32 @@ const WorkoutPlanForm = (props) => {
   useEffect(() => {
     async function fetchExercises() {
       try {
-        const response = await fetch("/api/exercises");
+        const token = localStorage.getItem('token'); 
+        const response = await fetch('/api/exercises', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error('Unauthorized access');
+        }
+  
         const data = await response.json();
-        console.log("Fetched exercises:", data);
+
         setExercises(data);
       } catch (error) {
-        console.error("Error fetching exercises:", error);
+        console.error('Error fetching exercises:', error);
       }
     }
-    console.log("Fething exercises");
+
     fetchExercises();
   }, []);
 
   const handleChange = (evt) => {
     const { name, value, options } = evt.target;
-    if (name === "exercises") {
+    if (name === 'exercises') {
       const selectedValues = Array.from(options)
         .filter((option) => option.selected)
         .map((option) => option.value);
@@ -100,11 +111,12 @@ const WorkoutPlanForm = (props) => {
             <option value="" disabled>
               --Select exercises--
             </option>
-            {exercises.map((exercise) => (
-              <option key={exercise._id} value={exercise._id}>
-                {exercise.name}
-              </option>
-            ))}
+            {Array.isArray(exercises) &&
+              exercises.map((exercise) => (
+                <option key={exercise._id} value={exercise._id}>
+                  {exercise.type}{" "}
+                </option>
+              ))}
           </select>
           <button type="submit">Create Workout Plan</button>
         </form>

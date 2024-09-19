@@ -32,7 +32,7 @@ export default function ExerciseUpdatePage() {
     console.log("Exercise Data:", exercise);
     try {
       await exercisesService.update(exercise_id, exercise);
-      navigate(`/exercises/${exercise_id}`);
+      navigate(`/exercises`);
     } catch (err) {
       console.error("Error updating exercise:", err);
     }
@@ -48,11 +48,13 @@ export default function ExerciseUpdatePage() {
     <main>
       <div className="exercise-form-container">
         <form className="exercise-form" onSubmit={handleUpdate}>
+
           <label htmlFor="exercise_id-input">Exercise</label>
+
           <input
             required
             type="text"
-            name="exercise_id"
+            name="exerciseid"
             id="exercise_id-input"
             value={exercise.exercise_id}
             onChange={handleChange}

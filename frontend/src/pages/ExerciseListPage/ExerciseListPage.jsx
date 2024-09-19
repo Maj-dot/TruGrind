@@ -8,6 +8,7 @@ export default function ExerciseListPage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     async function fetchExercises() {
       try {
@@ -17,13 +18,19 @@ export default function ExerciseListPage() {
         console.error("Error fetching exercises:", err);
         setError("Failed to load exercises.");
       }
+
     }
-    fetchExercises();
+  };
+
+  useEffect(() => {
+    refreshExercises();
   }, []);
 
   const handleDelete = async (exerciseId) => {
     try {
+
       await exercisesService.deleteExercise(exerciseId);
+
       setExercises(exercises.filter((exercise) => exercise._id !== exerciseId));
     } catch (err) {
       console.error("Error deleting exercise:", err);
@@ -38,6 +45,7 @@ export default function ExerciseListPage() {
           exercises.map((exercise) => (
             <div className="exercise-card" key={exercise._id}>
               <article>
+
                 <header>
                   <h2>{exercise.exercise_id}</h2>
                   <p className="posted-date">
@@ -60,7 +68,23 @@ export default function ExerciseListPage() {
                     Delete
                   </button>
                 </div>
+
               </article>
+
+              <div className="exercise-buttons">
+                <button
+                  className="view-exercise-button"
+                  onClick={() => navigate(`/exercises/${exercise._id}`)}
+                >
+                  View Exercise
+                </button>
+                <button
+                  className="delete-exercise-button"
+                  onClick={() => handleDelete(exercise._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         ) : (
